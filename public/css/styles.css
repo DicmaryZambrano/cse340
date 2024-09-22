@@ -29,7 +29,7 @@ a {
 /*Navigation*/
 
 nav {
-  background-color: #865c26
+  background-color: #583d19
 }
 
 nav ul {
@@ -74,7 +74,7 @@ header a {
 }
 
 header a:hover {
-  color: #7337ff;
+  color: #441e97;
 }
 
 .siteName a {
@@ -135,13 +135,13 @@ header a:hover {
   border: none;
   outline: none;
   border-radius: 4px;
-  background-color: #d33c21;
+  background-color: #8f2917;
   color: rgb(255, 255, 255);
   transition: all 0.3s ease;
 }
 
 .car-details button:hover {
-  background-color: #7337ff;
+  background-color: #411e94;
   transition: all 0.3s ease;
   color: white;
 }
@@ -193,7 +193,11 @@ header a:hover {
 }
 
 .upgrade-card a {
-  color: #7337ff;
+  color: #4d27a5;
+}
+
+.upgrade-card a:hover {
+  color: #000000;
 }
 
 .upgrade-box {
