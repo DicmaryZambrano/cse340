@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include("../partials/head") %>
+<%- include("../partials/head") %>
+
   <body id="home">
     <div class="home-box">
       <div class="header-container">
         <%- include("../partials/header") %>
-        <%-include("../partials/navigation")%>
+          <%- include("../partials/navigation")%>
       </div>
-      <%-include("../partials/hero")%>
-      <main class="home-grid"><%- body %></main>
+      <%- body %>
       <%- include("../partials/footer") %>
     </div>
   </body>
+
 </html>
