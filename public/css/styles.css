@@ -291,6 +291,7 @@ footer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  font-weight: 300;
   gap: 2rem;
   justify-content: space-around;
 }
@@ -298,7 +299,7 @@ footer {
 .action-box button {
   padding: .5rem;
   color: white;
-  background-color: #411e94;
+  background-color: #2e1568;
   border: 2px solid #370e4e;
   border-radius: .5rem;
   flex-grow: 1;
@@ -306,8 +307,8 @@ footer {
 }
 
 .action-box button:nth-child(2) {
-  color: #411e94;
-  background-color: #c8b9eb;
+  color: #2e1568;
+  background-color: #e1d9f3;
   border: 2px solid #c8b9eb;
 }
 
