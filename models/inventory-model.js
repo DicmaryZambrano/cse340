@@ -1,10 +1,78 @@
 const pool = require("../database/")
 
+/* *****************************
+ * Insert a new classification
+ ***************************** */
+async function insertClassification(classification_name) {
+  try {
+    const sql = `INSERT INTO public.classification (classification_name)
+                 VALUES ($1) RETURNING *`;
+    const result = await pool.query(sql, [classification_name]);
+    return result.rows[0];
+  } catch (error) {
+    throw new Error('Insert Classification Error: ' + error.message);
+  }
+}
+
+/* *****************************
+ * Insert a new inventory item
+ ***************************** */
+async function insertInventory({
+  inv_make, inv_model, inv_year, inv_description,
+  inv_image, inv_thumbnail, inv_price, inv_miles,
+  inv_color, classification_id
+}) {
+  try {
+    const sql = `INSERT INTO public.inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id)
+                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`;
+    const result = await pool.query(sql, [
+      inv_make, inv_model, inv_year, inv_description,
+      inv_image, inv_thumbnail, inv_price, inv_miles,
+      inv_color, classification_id
+    ]);
+    return result.rows[0];
+  } catch (error) {
+    throw new Error('Insert Inventory Error: ' + error.message);
+  }
+}
+
+
 /* ***************************
  *  Get all classification data
  * ************************** */
 async function getClassifications() {
-  return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
+  try {
+    return await pool.query("SELECT * FROM public.classification ORDER BY classification_name");
+  } catch (error) {
+    console.error("Error fetching classifications: " + error);
+    throw error;
+  }
+}
+
+/* **********************
+ *   Check for existing classification name
+ * ********************* */
+async function checkExistingClassification(classification_name) {
+  try {
+    const sql = "SELECT * FROM public.classification WHERE classification_name = $1"
+    const classification = await pool.query(sql, [classification_name])
+    return classification.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
+
+/* **********************
+ *   Check for classification by id
+ * ********************* */
+async function checkClassificationById(classification_id) {
+  try {
+    const sql = "SELECT * FROM public.classification WHERE classification_id = $1"
+    const classification = await pool.query(sql, [classification_id])
+    return classification.rowCount
+  } catch (error) {
+    return error.message
+  }
 }
 
 /* ***************************
@@ -34,4 +102,4 @@ async function getVehicleById(invId) {
   }
 }
 
-module.exports = { getClassifications, getInventoryByClassificationId, getVehicleById };
+module.exports = { getClassifications, getInventoryByClassificationId, getVehicleById, checkExistingClassification, checkClassificationById, insertClassification, insertInventory };

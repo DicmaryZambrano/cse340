@@ -28,7 +28,8 @@ Util.getNav = async function (req, res, next) {
 * Build the classification view HTML
 * ************************************ */
 Util.buildClassificationGrid = async function (data) {
-  let grid
+  let grid = ""; // Initialize as an empty string
+  console.log(data)
   if (data.length > 0) {
     grid = '<ul id="inv-display">'
     data.forEach(vehicle => {
@@ -102,6 +103,22 @@ Util.buildVehicleDetail = function (vehicle) {
   `;
   return detailHtml;
 };
+
+/* **************************************
+ * Build the classification list for dropdowns
+ ************************************** */
+Util.buildClassificationList = async function (classification_id = null) {
+  const classifications = await invModel.getClassifications();
+  let dropdown = "<select class='select-dropdown' name='classification_id' id='classification_id' required>";
+  dropdown += "<option value=''>Select Classification</option>";
+
+  classifications.rows.forEach((classification) => {
+    dropdown += `<option value='${classification.classification_id}' ${classification.classification_id == classification_id ? "selected" : ""}>${classification.classification_name}</option>`;
+  });
+  dropdown += "</select>";
+
+  return dropdown;
+}
 
 /* ****************************************
  * Middleware For Handling Errors

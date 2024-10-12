@@ -5,5 +5,9 @@
     </h1>
     <% } else { res.redirect('/') } %>
 
-      <%- grid %>
+    <% if (grid) { %> 
+      <%- grid %> 
+    <% } else { %>
+      <p class="notice">Sorry, no vehicles could be found at this time. Please check back later.</p>
+    <% } %>
 </main>

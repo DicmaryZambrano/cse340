@@ -1,0 +1,28 @@
+<main id="management">
+  <%- messages() %>
+
+    <% if (errors) { %>
+      <ul class="notice">
+        <% errors.array().forEach(error=> { %>
+          <li class="flash-message notice error">
+            <%= error.msg %>
+          </li>
+          <% }) %>
+      </ul>
+      <% } %>
+
+        <% if (title) { %>
+          <h1>
+            <%= title %>
+          </h1>
+          <% } else { res.redirect('/') } %>
+
+            <ul class="manage-box">
+              <li class="manage-button">
+                <a href="/inv/add-classification">Add New Classification</a>
+              </li>
+              <li class="manage-button">
+                <a href="/inv/add-inventory">Add New Inventory Item</a>
+              </li>
+            </ul>
+</main>

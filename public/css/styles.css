@@ -1,3 +1,25 @@
+:root {
+  /* Color Variables */
+  --color-dark-brown: #583d19;
+  --color-light-brown: #8f2917;
+  --color-dark-purple: #2e1568;
+  --color-light-purple: #441e97;
+  --color-light-orange: #e0ae6d;
+  --color-darker-brown: #411e94;
+  --color-gray: #ddd;
+  --color-light-gray: #ececec;
+  --color-off-white: #f3e7d7d5;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-gray-border: #aaa;
+  --color-error-bg: #ffdddd;
+  --color-error-border: #ff5c5c;
+  --color-error-text: #440003;
+  --color-info-bg: #e0ddff;
+  --color-info-border: #5c5fff;
+  --color-info-text: #070044;
+}
+
 /******* Change Box Model ***************/
 *,
 *:before,
@@ -20,7 +42,6 @@ h1 {
 
 a {
   text-decoration: none;
-  color: rgb(255, 255, 255)
 }
 
 button {
@@ -30,7 +51,7 @@ button {
 /*Navigation*/
 
 nav {
-  background-color: #583d19
+  background-color: var(--color-dark-brown);
 }
 
 nav ul {
@@ -46,23 +67,24 @@ nav ul li {
   text-align: center
 }
 
+
 nav a {
   display: block;
-  color: #eee;
+  color: var(--color-light-gray);
   padding: 0.75rem;
   text-align: center;
-  transition: all 0.3s ease
+  transition: all 0.3s ease;
 }
 
 nav ul li a:hover {
   background-color: rgb(24, 24, 24);
-  transition: all 0.3s ease
+  transition: all 0.3s ease;
 }
 
 /*Footer*/
 
 footer a {
-  color: #8f2917;
+  color: var(--color-light-brown);
 }
 
 /*Header*/
@@ -77,11 +99,11 @@ footer a {
 }
 
 header a {
-  color: black;
+  color: var(--color-black);
 }
 
 header a:hover {
-  color: #441e97;
+  color: var(--color-light-purple);
 }
 
 .siteName a {
@@ -142,15 +164,15 @@ header a:hover {
   border: none;
   outline: none;
   border-radius: 4px;
-  background-color: #8f2917;
-  color: rgb(255, 255, 255);
+  background-color: var(--color-light-brown);
+  color: var(--color-white);
   transition: all 0.3s ease;
 }
 
 .car-details button:hover {
-  background-color: #411e94;
+  background-color: var(--color-darker-brown);
   transition: all 0.3s ease;
-  color: white;
+  color: var(--color-white);
 }
 
 /*Home*/
@@ -200,11 +222,11 @@ header a:hover {
 }
 
 .upgrade-card a {
-  color: #4d27a5;
+  color: var(--color-dark-purple);
 }
 
 .upgrade-card a:hover {
-  color: #000000;
+  color: var(--color-black);
 }
 
 .upgrade-box {
@@ -376,6 +398,168 @@ footer {
 #error-main h3 {
   font-size: 1.2rem;
   color: #666;
+}
+
+/* Common Styles */
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+button,
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Flash Messages */
+.flash-message,
+#messages ul li {
+  padding: 1rem;
+  margin: 1rem;
+  text-align: center;
+  border-radius: 5px;
+  list-style: none;
+}
+
+.flash-message {
+  background-color: #ffdddd;
+  border: 1px solid #ff5c5c;
+  color: #440003;
+}
+
+#messages ul li {
+  background-color: #e0ddff;
+  border: 1px solid #5c5fff;
+  color: #070044;
+}
+
+/* Layout Containers */
+#management,
+#add-classification,
+#login,
+#register,
+#add-inventory {
+  margin: 1rem;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#management h1 {
+  margin-bottom: 1rem;
+}
+
+/* Manage Box */
+.manage-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.manage-button,
+#login a,
+#register a {
+  padding: 0.5rem;
+  background-color: #583d19;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+}
+
+.manage-button a {
+  display: block;
+  color: inherit;
+}
+
+.manage-button:hover,
+#login a:hover,
+#register a:hover {
+  background-color: rgb(24, 24, 24);
+}
+
+/* Form Styles */
+.login-form,
+.register-form,
+.classification-form,
+.inventory-form {
+  background-color: #ececec;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+  margin: 1rem;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="url"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+input[type="text"],
+textarea {
+  resize: none;
+}
+
+/* Button Styles */
+.btn-submit {
+  width: 100%;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.btn-submit:hover {
+  background-color: #555;
+}
+
+/* Dropdown Styles */
+.select-dropdown {
+  width: 100%;
+  padding: .5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 14px;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Dropdown hover effect */
+.select-dropdown:hover {
+  border-color: #aaa;
+}
+
+/* Focus effect */
+.select-dropdown:focus {
+  border-color: #333;
+  outline: none;
+  box-shadow: 0 0 5px rgba(51, 51, 51, 0.3);
 }
 
 @media (min-width: 900px) {
