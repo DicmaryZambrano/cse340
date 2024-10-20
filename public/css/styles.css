@@ -48,6 +48,10 @@ button {
   font-size: 16px;
 }
 
+input {
+  padding: .6rem;
+}
+
 /*Navigation*/
 
 nav {
@@ -78,6 +82,25 @@ nav a {
 
 nav ul li a:hover {
   background-color: rgb(24, 24, 24);
+  transition: all 0.3s ease;
+}
+
+#tools li a {
+  display: block;
+  background-color: #c0c1ff;
+  color: #363636;
+  padding: .3rem;
+  margin: .5rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+#tools li a:hover {
+  background-color: #363636;
+  color: #c0c1ff;
+  padding: .3rem;
+  margin: .5rem;
+  border-radius: 5px;
   transition: all 0.3s ease;
 }
 
@@ -441,13 +464,35 @@ a {
 #add-classification,
 #login,
 #register,
-#add-inventory {
+#add-inventory,
+#edit-inventory,
+#account,
+#update-account {
   margin: 1rem;
   min-height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+#account h1 {
+  margin-bottom: 1rem;
+}
+
+#account a {
+  display: block;
+  padding: 1rem;
+  background-color: #411e94;
+  color: #ffffff;
+  border-radius: 10px;
+  margin: .5rem;
+  transition: all 0.3s ease;
+}
+
+#account a:hover {
+  background-color: #000000;
+  transition: all 0.3s ease;
 }
 
 #management h1 {
@@ -459,6 +504,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .manage-button,
@@ -486,7 +532,9 @@ a {
 .login-form,
 .register-form,
 .classification-form,
-.inventory-form {
+.inventory-form,
+#updateForm,
+#passwordForm {
   background-color: #ececec;
   padding: 1rem;
   border-radius: 8px;
@@ -494,6 +542,14 @@ a {
   width: 100%;
   max-width: 800px;
   margin: 1rem;
+}
+
+#update-account h2 {
+  margin-bottom: 1rem;
+}
+
+#update-account p {
+  padding: 1rem 1rem 0 1rem;
 }
 
 .form-group {
@@ -513,7 +569,7 @@ input[type="url"],
 input[type="number"],
 textarea {
   width: 100%;
-  padding: 10px;
+  padding: .6rem;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -531,10 +587,12 @@ textarea {
   color: white;
   border: none;
   border-radius: 4px;
+  border: 2px solid #333;
 }
 
 .btn-submit:hover {
   background-color: #555;
+  border: 2px solid #333;
 }
 
 /* Dropdown Styles */
@@ -560,6 +618,80 @@ textarea {
   border-color: #333;
   outline: none;
   box-shadow: 0 0 5px rgba(51, 51, 51, 0.3);
+}
+
+/* Table Styles */
+#inventoryDisplay {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+#inventoryDisplay thead {
+  background-color: #f8f8f8;
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 0.9rem;
+}
+
+#inventoryDisplay th {
+  background-color: #ececec;
+  font-weight: bold;
+  color: #333;
+}
+
+#inventoryDisplay tr:hover {
+  background-color: #f1f1f1;
+}
+
+#inventoryDisplay a {
+  color: #5c5fff;
+  text-decoration: none;
+}
+
+#inventoryDisplay a:hover {
+  text-decoration: underline;
+}
+
+/* Adjust buttons for smaller screens */
+#inventoryDisplay td a {
+  display: inline-block;
+  padding: 0.3rem 0.5rem;
+  background-color: #333;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-right: 0.3rem;
+}
+
+#inventoryDisplay td a:hover {
+  background-color: #555;
+}
+
+#management #classification_id {
+  max-width: 200px;
+}
+
+#management h2,
+#management p {
+  margin-bottom: 1rem;
+}
+
+form button[disabled] {
+  background-color: #222;
+  background-color: #aaaaaa;
+  border: 2px solid #5e5e5e;
+}
+
+form button[disabled]:hover {
+  background-color: #222;
+  background-color: #aaaaaa;
+  border: 2px solid #5e5e5e;
 }
 
 @media (min-width: 900px) {
@@ -680,6 +812,37 @@ textarea {
 
   #error-main h3 {
     font-size: 1.2rem;
+  }
+
+  #inventoryDisplay {
+    width: 90%;
+    margin: 1rem auto;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  #inventoryDisplay thead {
+    background-color: #d6d6d6;
+  }
+
+  #inventoryDisplay th,
+  #inventoryDisplay td {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  #inventoryDisplay td a {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+  }
+
+  #inventoryDisplay td a:hover {
+    background-color: #222;
+  }
+
+  #inventoryDisplay tr:hover {
+    background-color: #eaeaea;
   }
 
 }

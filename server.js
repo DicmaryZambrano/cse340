@@ -12,6 +12,7 @@ const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
 const env = require("dotenv").config()
 const app = express()
@@ -48,6 +49,14 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 /* ***********************
+* Cookies
+*************************/
+
+app.use(cookieParser())
+
+app.use(utilities.checkJWTToken)
+
+/* ***********************
  * View Engine and Templates
  *************************/
 
@@ -79,15 +88,18 @@ app.use(async (req, res, next) => {
 *************************/
 
 app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav()
-  console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  if (err.status == 404) { message = err.message } else { message = 'Oh no! There was a crash. Maybe try a different route?' }
-  res.render("errors/error", {
+  let nav = await utilities.getNav();
+  console.error(`Error at: "${req.originalUrl}": ${err.message}`);
+
+  // Use the provided error message if it exists, otherwise fall back to a default
+  const message = err.message || 'Oh no! There was a crash. Maybe try a different route?';
+
+  res.status(err.status || 500).render("errors/error", {
     title: err.status || 'Server Error',
     message,
     nav
-  })
-})
+  });
+});
 
 /* ***********************
  * Local Server Information

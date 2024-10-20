@@ -1,0 +1,34 @@
+<main id="account">
+  <%- messages() %>
+
+    <% if (errors) { %>
+      <ul class="notice">
+        <% errors.array().forEach(error=> { %>
+          <li class="flash-message notice error">
+            <%= error.msg %>
+          </li>
+          <% }) %>
+      </ul>
+      <% } %>
+
+        <h1>
+          <%= title %>
+        </h1>
+
+        <% if (locals.accountData) { %>
+          <h2>Welcome <%= locals.accountData.account_firstname %>
+          </h2>
+          <!-- Update Account Information Link -->
+          <p>
+            <a href="/account/update/<%= locals.accountData.account_id %>" title="Update Account Information">Update
+              Account
+              Information</a>
+          </p>
+          <% if (locals.accountData.account_type==="Employee" || locals.accountData.account_type==="Admin" ) { %>
+            <h2>Inventory Management</h2>
+            <p>
+              <a href="/inv/" title="Access Inventory Management">Go to Inventory Management</a>
+            </p>
+            <% } %>
+              <% } %>
+</main>
