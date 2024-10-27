@@ -469,7 +469,8 @@ a {
 #account,
 #update-account,
 #edit-review,
-#delete-review {
+#delete-review,
+#add-review {
   margin: 1rem;
   min-height: 60vh;
   display: flex;
@@ -738,7 +739,6 @@ form button[disabled]:hover {
   color: #e0e0e0;
   cursor: pointer;
   transition: color 0.3s ease, transform 0.3s ease;
-  vertical-align: middle;
   margin: 0;
 }
 
