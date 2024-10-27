@@ -467,7 +467,9 @@ a {
 #add-inventory,
 #edit-inventory,
 #account,
-#update-account {
+#update-account,
+#edit-review,
+#delete-review {
   margin: 1rem;
   min-height: 60vh;
   display: flex;
@@ -509,7 +511,8 @@ a {
 
 .manage-button,
 #login a,
-#register a {
+#register a,
+#delete-review a {
   padding: 0.5rem;
   background-color: #583d19;
   border-radius: 10px;
@@ -517,14 +520,25 @@ a {
   color: white;
 }
 
-.manage-button a {
+.manage-button a,
+#delete-review a {
   display: block;
-  color: inherit;
+}
+
+#delete-review h3 {
+  margin-bottom: 2rem;
+}
+
+#delete-review form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .manage-button:hover,
 #login a:hover,
-#register a:hover {
+#register a:hover,
+#delete-review a:hover {
   background-color: rgb(24, 24, 24);
 }
 
@@ -534,7 +548,8 @@ a {
 .classification-form,
 .inventory-form,
 #updateForm,
-#passwordForm {
+#passwordForm,
+.review-form {
   background-color: #ececec;
   padding: 1rem;
   border-radius: 8px;
@@ -682,6 +697,10 @@ textarea {
   margin-bottom: 1rem;
 }
 
+.manage-button a {
+  color: white;
+}
+
 form button[disabled] {
   background-color: #222;
   background-color: #aaaaaa;
@@ -693,6 +712,146 @@ form button[disabled]:hover {
   background-color: #aaaaaa;
   border: 2px solid #5e5e5e;
 }
+
+/* Rating */
+
+.star-rating {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 200px;
+  position: relative;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #ffd700;
+}
+
+.star-rating input:checked ~ label {
+  color: #ffba00;
+}
+
+.star-rating input:checked + label:hover {
+  transform: scale(1.2);
+}
+
+.star-rating label::before {
+  content: '\2605';
+}
+
+/* Reviews */
+
+#reviews {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+#reviews hr {
+  margin-bottom: 1rem;
+}
+
+#reviews h3 {
+  margin-bottom: 2rem;
+}
+
+#reviews h4 {
+  margin-bottom: .5rem;
+}
+
+.review {
+  background-color: #f8f8ff;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  padding: 1.2rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.review:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.review h5 {
+  font-size: 1.1rem;
+  color: #411e94;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.add-review {
+  display: block;
+  padding: 0.5rem 1rem;
+  background-color: #411e94;
+  width: 130px;
+  color: #fff;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.add-review:hover {
+  background-color: #333;
+}
+
+.review p {
+  font-size: 1rem;
+  color: #333;
+  margin: 0.8rem 0;
+  line-height: 1.5;
+}
+
+.review small {
+  font-size: 0.85rem;
+  color: #474747;
+}
+
+.review-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.review-actions a {
+  padding: 0.5rem 1rem;
+  background-color: #583d19;
+  color: #fff;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.review-actions a:hover {
+  background-color: #333;
+}
+
+#your-review-container p,
+#all-reviews-container p {
+  color: #242424;
+  font-style: italic;
+}
+
 
 @media (min-width: 900px) {
   .home-box {

@@ -10,6 +10,7 @@ async function insertClassification(classification_name) {
     const result = await pool.query(sql, [classification_name]);
     return result.rows[0];
   } catch (error) {
+    console.log("Error while inserting to classification: " + error)
     throw new Error('Insert Classification Error: ' + error.message);
   }
 }
@@ -32,6 +33,7 @@ async function insertInventory({
     ]);
     return result.rows[0];
   } catch (error) {
+    console.log("Error while inserting to inventory: " + error)
     throw new Error('Insert Inventory Error: ' + error.message);
   }
 }
@@ -70,7 +72,8 @@ async function updateInventory(
     ])
     return data.rows[0]
   } catch (error) {
-    new Error("Update Inventory Error")
+    console.log("Error while updating inventory: " + error)
+    throw new Error('Update Inventory Error: ' + error.message);
   }
 }
 
@@ -88,7 +91,8 @@ async function deleteInventoryItem(
     ])
     return data
   } catch (error) {
-    new Error("Delete Inventory Error")
+    console.log("Error while deleting from inventory: " + error)
+    throw new Error('Deleting Inventory Error: ' + error.message);
   }
 }
 
@@ -99,8 +103,8 @@ async function getClassifications() {
   try {
     return await pool.query("SELECT * FROM public.classification ORDER BY classification_name");
   } catch (error) {
-    console.error("Error fetching classifications: " + error);
-    throw error;
+    console.log("Error while deleting from inventory: " + error)
+    throw new Error('Error while fetching classification: ' + error.message);
   }
 }
 
@@ -113,7 +117,8 @@ async function checkExistingClassification(classification_name) {
     const classification = await pool.query(sql, [classification_name])
     return classification.rowCount
   } catch (error) {
-    return error.message
+    console.log("Error while checking classification: " + error)
+    throw new Error('Checking Classification Error: ' + error.message);
   }
 }
 
@@ -126,7 +131,8 @@ async function checkClassificationById(classification_id) {
     const classification = await pool.query(sql, [classification_id])
     return classification.rowCount
   } catch (error) {
-    return error.message
+    console.log("Error while checking classification: " + error)
+    throw new Error('Checking Classification Error: ' + error.message);
   }
 }
 
@@ -144,7 +150,8 @@ async function getInventoryByClassificationId(classification_id) {
     )
     return data.rows
   } catch (error) {
-    console.error("getclassificationsbyid error " + error)
+    console.log("Error while getting classification: " + error)
+    throw new Error('Getting classification Error: ' + error.message);
   }
 }
 
@@ -153,7 +160,8 @@ async function getVehicleById(invId) {
     const result = await pool.query("SELECT * FROM public.inventory WHERE inv_id = $1", [invId]);
     return result.rows[0];
   } catch (error) {
-    console.error("getVehicleById error: " + error);
+    console.log("Error while getting vehicle: " + error)
+    throw new Error('Getting Vehicle Error: ' + error.message);
   }
 }
 

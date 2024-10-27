@@ -24,7 +24,7 @@ router.get('/add-classification', utilities.checkLogin, utilities.checkAccountTy
 // Route to get the inventory edit form
 router.get("/edit/:invId", utilities.checkLogin, utilities.checkAccountType, utilities.handleErrors(invController.buildEditView));
 
-// Route to get the inventory edit form
+// Route to get the iventory delete confirmation
 router.get("/delete/:invId", utilities.checkLogin, utilities.checkAccountType, utilities.handleErrors(invController.buildDeleteView));
 
 // Route to build add inventory view

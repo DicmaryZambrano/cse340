@@ -42,6 +42,31 @@ CREATE TABLE IF NOT EXISTS PUBLIC.ACCOUNT (
 	CONSTRAINT ACCOUNT_PKEY PRIMARY KEY (ACCOUNT_ID)
 );
 
+CREATE TABLE reviews (
+  review_id SERIAL PRIMARY KEY,
+  inv_id INT REFERENCES inventory(inv_id),
+  client_id INT REFERENCES account(account_id),
+  rating INT CHECK (rating BETWEEN 1 AND 5),
+  review_text TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create a function to update the 'updated_at' column
+CREATE OR REPLACE FUNCTION update_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = CURRENT_TIMESTAMP;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Create a trigger that calls the function before updating a row
+CREATE TRIGGER update_reviews_timestamp
+BEFORE UPDATE ON reviews
+FOR EACH ROW
+EXECUTE FUNCTION update_timestamp();
+
 -- Data for table 'classification'
 INSERT INTO
 	PUBLIC.CLASSIFICATION (CLASSIFICATION_NAME)
@@ -267,3 +292,50 @@ UPDATE PUBLIC.INVENTORY
 SET
 	INV_IMAGE = REPLACE(INV_IMAGE, '/images/', '/images/vehicles/'),
 	INV_THUMBNAIL = REPLACE(INV_THUMBNAIL, '/images/', '/images/vehicles/');
+
+-- #7 Add Accounts
+
+-- Insert new account: Basic Client
+INSERT INTO PUBLIC.ACCOUNT (
+    ACCOUNT_FIRSTNAME,
+    ACCOUNT_LASTNAME,
+    ACCOUNT_EMAIL,
+    ACCOUNT_PASSWORD,
+    ACCOUNT_TYPE
+) VALUES (
+    'Basic',
+    'Client',
+    'basic@340.edu',
+    'I@mABas1cCl!3nt',
+    'Client'
+);
+
+-- Insert new account: Happy Employee
+INSERT INTO PUBLIC.ACCOUNT (
+    ACCOUNT_FIRSTNAME,
+    ACCOUNT_LASTNAME,
+    ACCOUNT_EMAIL,
+    ACCOUNT_PASSWORD,
+    ACCOUNT_TYPE
+) VALUES (
+    'Happy',
+    'Employee',
+    'happy@340.edu',
+    'I@mAnEmpl0y33',
+    'Employee'
+);
+
+-- Insert new account: Manager User
+INSERT INTO PUBLIC.ACCOUNT (
+    ACCOUNT_FIRSTNAME,
+    ACCOUNT_LASTNAME,
+    ACCOUNT_EMAIL,
+    ACCOUNT_PASSWORD,
+    ACCOUNT_TYPE
+) VALUES (
+    'Manager',
+    'User',
+    'manager@340.edu',
+    'I@mAnAdm!n1strat0r',
+    'Admin'
+);

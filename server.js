@@ -18,8 +18,9 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
-const errorRoute = require("./routes/errorRoute");
+const errorRoute = require("./routes/errorRoute")
 const accountRoute = require("./routes/accountRoute")
+const reviewRoute = require("./routes/reviewRoute")
 
 
 /* ***********************
@@ -75,6 +76,8 @@ app.get("/", baseController.buildHome)
 app.use("/inv", inventoryRoute)
 // Account routes
 app.use("/account", accountRoute)
+// Review routes
+app.use("/review", reviewRoute)
 // Error route (trigger a 500 error)
 app.use("/", errorRoute);
 // File Not Found Route - must be last route in list
@@ -90,12 +93,21 @@ app.use(async (req, res, next) => {
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav();
   console.error(`Error at: "${req.originalUrl}": ${err.message}`);
-
-  // Use the provided error message if it exists, otherwise fall back to a default
-  const message = err.message || 'Oh no! There was a crash. Maybe try a different route?';
-
+  
+  const defaultMessages = {
+    400: "Bad Request. Please check your input and try again.",
+    401: "Unauthorized access. Please log in to proceed.",
+    403: "Forbidden. You don't have permission to access this resource.",
+    404: "Page not found. The resource you're looking for does not exist.",
+    500: "Oops! Something went wrong on our end. Please try again later."
+  };
+  
+  // Determine the message to show to the user
+  const message = defaultMessages[err.status] || "An unexpected error occurred. Please try again later.";
+  
+  // Render the error page
   res.status(err.status || 500).render("errors/error", {
-    title: err.status || 'Server Error',
+    title: err.status ? `Error ${err.status}` : "Server Error",
     message,
     nav
   });

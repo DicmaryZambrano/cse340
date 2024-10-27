@@ -36,6 +36,7 @@ invCont.buildDetailView = async function (req, res, next) {
       title: `${vehicle.inv_make} ${vehicle.inv_model}`,
       nav,
       vehicleHtml,
+      invId
     });
   } catch (error) {
     next(error);
@@ -269,7 +270,10 @@ invCont.getInventoryJSON = async (req, res, next) => {
   if (invData[0].inv_id) {
     return res.json(invData)
   } else {
-    next(new Error("No data returned"))
+    const error = new Error("No data returned")
+    console.error("Error fetching inventory classifications:", error);
+    error.status = 500;
+    next(error);
   }
 }
 
@@ -304,6 +308,8 @@ invCont.buildEditView = async function (req, res, next) {
       classification_id: vehicle.classification_id
     });
   } catch (error) {
+    console.error("Error fetching inventory by classification:", error);
+    error.status = 500;
     next(error);
   }
 };
@@ -329,6 +335,8 @@ invCont.buildDeleteView = async function (req, res, next) {
       inv_price: vehicle.inv_price,
     });
   } catch (error) {
+    console.error("Error fetching inventory by classification:", error);
+    error.status = 500;
     next(error);
   }
 };

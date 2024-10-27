@@ -1,8 +1,37 @@
 <main id="detail-grid">
-  <% if (title) { %>
-    <h1>
-      <%= title %>
-    </h1>
-    <% } else { res.redirect('/') } %>
-      <%- vehicleHtml %>
+  <%- messages() %>
+
+    <% if (title) { %>
+      <h1>
+        <%= title %>
+      </h1>
+      <% } else { res.redirect('/') } %>
+
+        <%- vehicleHtml %>
+
+          <section id="reviews">
+            <h3>Client Reviews</h3>
+            <div id="reviews-container">
+              <!-- If the user is not logged in, show a login link -->
+              <% if (!locals.loggedin) { %>
+                <% } else { %>
+                  <% if (locals.accountData.account_type==="Client" ) { %>
+                    <div id="client-reviews">
+                      <h4>Your Review</h4>
+                      <div id="your-review-container"></div>
+                      <p><a class="add-review" href="/review/add-review/<%= invId %>">Write a review</a></p>
+                    </div>
+                    <% } %>
+                      <% } %>
+                        <hr>
+                        <h4>All Reviews</h4>
+                        <div id="all-reviews-container"></div>
+            </div>
+          </section>
 </main>
+<script>
+  document.getElementById("reviews-container").dataset.invId = "<%= invId %>";
+  document.getElementById("reviews-container").dataset.account_id = "<%= (locals.accountData && locals.accountData.account_id) ? locals.accountData.account_id : '' %>";
+  document.getElementById("reviews-container").dataset.account_type = "<%= (locals.accountData && locals.accountData.account_type) ? locals.accountData.account_type : '' %>";
+</script>
+<script src="../../js/reviews.js"></script>

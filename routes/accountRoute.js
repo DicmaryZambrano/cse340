@@ -20,6 +20,10 @@ router.get("/logout", (req, res) => {
   req.flash("notice", "You have been logged out successfully.")
   res.redirect("/account/login")
 });
+
+// Route to get account information by ID
+router.get("/getAccount/:account_id", utilities.handleErrors(accountController.getAccountById));
+
 // Process the login attempt
 router.post(
   "/login",

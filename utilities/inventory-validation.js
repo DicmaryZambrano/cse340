@@ -170,6 +170,7 @@ validate.checkUpdateData = async (req, res, next) => {
 
   if (!errors.isEmpty()) {
     let classifications = await utilities.buildClassificationList(classification_id)
+    const vehicle = await invModel.getVehicleById(inv_id); 
     let nav = await utilities.getNav()
     const itemName = `${vehicle.inv_make} ${vehicle.inv_model}`
     res.render("./inventory/edit-inventory", {

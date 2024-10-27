@@ -270,5 +270,23 @@ async function changePassword(req, res, next) {
   }
 }
 
+/* ****************************************
+ *  Get Account Data by ID
+ * *************************************** */
+async function getAccountById(req, res, next) {
+  const accountId = parseInt(req.params.account_id);
+  try {
+    const accountData = await accountModel.getAccountById(accountId);
+    if (accountData) {
+      res.status(200).json(accountData);
+    } else {
+      res.status(404).json({ message: "Account not found." });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Failed to retrieve account data." });
+    next(error);
+  }
+}
 
-module.exports = { buildLogin, buildRegister, registerAccount, processLogin, accountLogin, buildAccountView, buildEditView, updateAccount, changePassword }
+
+module.exports = { buildLogin, buildRegister, registerAccount, processLogin, accountLogin, buildAccountView, buildEditView, updateAccount, changePassword, getAccountById }
