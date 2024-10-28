@@ -5,11 +5,11 @@ const reviewController = require("../controllers/reviewController")
 const utilities = require("../utilities")
 const validate = require('../utilities/review-validation')
 
-router.get("/add-review/:invId", utilities.checkLogin, utilities.handleErrors(reviewController.buildAddReview));
+router.get("/add-review/:invId", utilities.checkLogin, utilities.checkClient, utilities.handleErrors(reviewController.buildAddReview));
 
-router.get("/delete-review/:reviewId", utilities.checkLogin, utilities.handleErrors(reviewController.buildDeleteReview));
+router.get("/delete-review/:reviewId", utilities.checkLogin, utilities.checkClient, utilities.verifyReviewOwner, utilities.handleErrors(reviewController.buildDeleteReview));
 
-router.get("/edit-review/:reviewId", utilities.checkLogin, utilities.handleErrors(reviewController.buildEditReview));
+router.get("/edit-review/:reviewId", utilities.checkLogin, utilities.checkClient, utilities.verifyReviewOwner, utilities.handleErrors(reviewController.buildEditReview));
 
 router.get("/getReviews/:invId", utilities.handleErrors(reviewController.getReviewsJSON));
 

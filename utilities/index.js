@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const reviewModel = require("../models/review-model")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 const Util = {}
@@ -162,6 +163,39 @@ Util.checkLogin = (req, res, next) => {
   } else {
     req.flash("notice", "Please log in.")
     return res.redirect("/account/login")
+  }
+}
+
+/* ****************************************
+ * Middleware to verify if the user is a client
+ * ************************************ */
+Util.checkClient = (req, res, next) => {
+  if (res.locals.accountData && res.locals.accountData.account_type === "Client") {
+    return next();
+  } else {
+    req.flash("notice", "Access denied. Clients only.");
+    return res.redirect("/account/login");
+  }
+}
+
+
+/* ****************************************
+* Middleware to check if the logged-in user is the owner of the review
+ * ************************************ */
+Util.verifyReviewOwner = async (req, res, next) => {
+  const { reviewId } = req.params;
+  const userId = res.locals.accountData.account_id;
+
+  try {
+    const review = await reviewModel.getReviewById(reviewId);
+    if (review && review.client_id === userId) {
+      return next();
+    } else {
+      req.flash("notice", "You are not authorized to edit or delete this review.");
+      return res.redirect("/account/");
+    }
+  } catch (error) {
+    next(error);
   }
 }
 
